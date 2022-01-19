@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\AuthController;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -14,5 +16,12 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('layouts.auth.login');
+    // if (Auth::check()) {
+    //     // return redirect('/home');
+    //     return view('layouts.auth.login');
+    // } else {
+        return view('layouts.auth.login');
+    // }
 });
+
+Route::post('/login', [AuthController::class, 'login']);
