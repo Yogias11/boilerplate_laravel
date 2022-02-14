@@ -21,10 +21,12 @@ class AuthController extends Controller
             if (Auth::user()->divisi_id == 1 && Auth::user()->is_aktif == 'aktif') {
                 User::where('id', Auth::user()->id)->update(['last_login' => Carbon::now()]);
 
-                return response()->json(['msg' => 'Login Berhasil']);
+                return response()->json(['msg' => 'Login Berhasil', 'error' => false]);
             } else {
-                
+                return response()->json(['msg' => 'Login Gagal', 'error' => false]);
             }
+        } else {
+            return response()->json(['msg' => 'Tidak Ada Data', 'error' => true]);
         }
     }
 }

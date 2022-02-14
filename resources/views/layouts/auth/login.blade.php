@@ -48,7 +48,7 @@
         </div>
         <div class="row">
           <div class="col-8">
-          
+
           </div>
           <!-- /.col -->
           <div class="col-4">
@@ -58,7 +58,7 @@
         </div>
       </form>
 
-      
+
     </div>
     <!-- /.login-card-body -->
   </div>
@@ -80,11 +80,15 @@ $('#form_login').submit(function(e) {
         type: "post",
         data: formData,
         success: function(res) {
-            console.log(res);   
+            if (res.error == true) {
+                alert(res.msg);
+            } else {
+                console.log(res.msg);
+            }
         },
-        error: function(res) {
-            alert(res);
-        }
+        // error: function(res) {
+        //     alert(res.msg);
+        // }
     })
     // console.log('test');
 })
