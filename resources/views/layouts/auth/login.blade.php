@@ -28,7 +28,7 @@
     <div class="card-body login-card-body">
       <p class="login-box-msg">Sign in to start your session</p>
 
-      <form id="form_login">
+      <form id="form_login" method="POST" action="{{ url('/login') }}">
           @csrf
         <div class="input-group mb-3">
           <input type="text" name="username" class="form-control" placeholder="Username">
@@ -72,26 +72,26 @@
 <!-- AdminLTE App -->
 <script src="{{ asset('') }}assets/dist/js/adminlte.min.js"></script>
 <script>
-$('#form_login').submit(function(e) {
-    e.preventDefault();
-    var formData = $(this).serialize();
-    $.ajax({
-        url: "{{ url('/login') }}",
-        type: "post",
-        data: formData,
-        success: function(res) {
-            if (res.error == true) {
-                alert(res.msg);
-            } else {
-                console.log(res.msg);
-            }
-        },
-        // error: function(res) {
-        //     alert(res.msg);
-        // }
-    })
-    // console.log('test');
-})
+// $('#form_login').submit(function(e) {
+//     e.preventDefault();
+//     var formData = $(this).serialize();
+//     $.ajax({
+//         url: "{{ url('/login') }}",
+//         type: "post",
+//         data: formData,
+//         success: function(res) {
+//             if (res.error == true) {
+//                 alert(res.msg);
+//             } else {
+//                 console.log(res.msg);
+//             }
+//         },
+//         // error: function(res) {
+//         //     alert(res.msg);
+//         // }
+//     })
+//     // console.log('test');
+// })
 </script>
 </body>
 </html>

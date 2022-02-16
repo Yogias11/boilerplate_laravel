@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\TestController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -15,13 +16,16 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    // if (Auth::check()) {
-    //     // return redirect('/home');
-    //     return view('layouts.auth.login');
-    // } else {
-        return view('layouts.auth.login');
-    // }
-});
-
+Route::get('/', [AuthController::class, 'index']);
 Route::post('/login', [AuthController::class, 'login']);
+Route::get('/logout', [AuthController::class, 'logout'])->name('logout');
+
+Route::group(['middleware' => ['auth']], function() {
+    Route::group(['middleware' => ['cekLogin:1']], function() {
+        Route::get('home', [TestController::class, 'index']);
+    });
+
+    Route::group(['middleware' => ['cekLogin:2']], function() {
+        Route::get('home1', [TestController::class, 'index']);
+    });
+});
